@@ -3,18 +3,20 @@ import Header from './components/Header'
 import Board from './components/Board'
 import Footer from './components/Footer'
 import TaskModal from './components/TaskModal'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function App() {
 
   const [modalOpen, setModalOpen] = useState(false)
 
-  const [tasks, setTasks] = useState([
-    { id: 1, titulo: "Estudar React", descricao: "Ver documentação oficial", status: "por-fazer" },
-    { id: 2, titulo: "Fazer exercícios", descricao: "Resolver exercícios do curso", status: "em-andamento" },
-    { id: 3, titulo: "Criar projeto", descricao: "Desenvolver um projeto usando React", status: "finalizado" }
-  ])
-
+  const [tasks, setTasks] = useState(() => {
+    const salvas = localStorage.getItem("tasks")
+    return salvas ? JSON.parse(salvas) : [
+      { id: 1, titulo: "Estudar React", descricao: "Ver documentação oficial", status: "por-fazer" },
+      { id: 2, titulo: "Fazer exercícios", descricao: "Resolver exercícios do curso", status: "em-andamento" },
+      { id: 3, titulo: "Criar projeto", descricao: "Desenvolver um projeto usando React", status: "finalizado" }
+    ]
+  })
   function adicionarTask(titulo, descricao) {
     const novaTask = {
       id: tasks.length + 1,
@@ -39,6 +41,10 @@ function App() {
     const tarefasAtualizadas = tasks.filter(task => task.id !== id)
     setTasks(tarefasAtualizadas)
   }
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks))
+  }, [tasks])
 
   return (
     <div>
