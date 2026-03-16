@@ -43,8 +43,6 @@ header {
 }
 
 h1 {
-  font-size: 26px;
-  margin: 0;
   color: green
 }
 
@@ -87,7 +85,7 @@ h1 {
   padding: 0;
 }
 
-.column li {
+.task-card {
   background-color: #fff8e7;
   border-radius: 6px;
   padding: 10px;
@@ -117,13 +115,13 @@ h1 {
   width: 300px;
   text-align: center;
   position: relative;
+}
 
-  .modal-content h2 
+.modal-content h2 
   {
     margin-top: 0;
     color: #333;
   }
-}
 
 .modal-overlay button {
   background-color:darkcyan;
@@ -135,7 +133,6 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
 }
 
 .close-button {

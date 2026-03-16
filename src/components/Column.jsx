@@ -1,8 +1,8 @@
 import TaskCard from "./TaskCard"
 
-function Column({ title, tasks, atualizarStatus, excluirTask }) {
+function Column({ title, tasks, className, atualizarStatus, excluirTask }) {
   return (
-    <div className="column">
+    <div className={`column ${className}`}>
       <h2>{title}</h2>
       <ul>
         {tasks.map(task => (
