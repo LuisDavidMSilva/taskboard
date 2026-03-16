@@ -1,13 +1,12 @@
-function Column({ title, tasks }) {
+import TaskCard from "./TaskCard"
+
+function Column({ title, tasks, atualizarStatus, excluirTask }) {
   return (
-    <div className="column">
+    <div className="column" atualizarStatus={atualizarStatus} excluirTask={excluirTask}>
       <h2>{title}</h2>
       <ul>
         {tasks.map(task => (
-          <li key={task.id}>
-            <h3>{task.titulo}</h3>
-            <p>{task.descricao}</p>
-          </li>
+         <TaskCard key={task.id} task={task} atualizarStatus={atualizarStatus} excluirTask={excluirTask}></TaskCard>
         ))}
       </ul>
     </div>

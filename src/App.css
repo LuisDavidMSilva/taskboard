@@ -82,6 +82,19 @@ h1 {
   color: #333;
 }
 
+.column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.column li {
+  background-color: #fff8e7;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
 .modal-overlay {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 20px;
@@ -103,6 +116,13 @@ h1 {
   border-radius: 8px;
   width: 300px;
   text-align: center;
+  position: relative;
+
+  .modal-content h2 
+  {
+    margin-top: 0;
+    color: #333;
+  }
 }
 
 .modal-overlay button {
@@ -118,19 +138,22 @@ h1 {
   flex-direction: column;
 }
 
-.modal-overlay close-button {
+.close-button {
   position: absolute;
   top: 10px;
   right: 10px;
   background-color: transparent;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  position: fixed;
-  padding: 10px 20px;
-  margin-top: 10px;
-  bottom: 20px;
-  right: 20px;
+  color: #333;
+  font-size: 18px;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .add-task-button {
@@ -145,6 +168,17 @@ h1 {
   bottom: 20px;
   right: 20px;
   transform: scaleY(-1);
+}
+
+.modal-add-task-button {
+  background-color: green;
+  color: #282c34;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  align-self: center;
 }
 
 .footer {

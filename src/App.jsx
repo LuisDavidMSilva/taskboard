@@ -15,14 +15,39 @@ function App() {
     { id: 3, titulo: "Criar projeto", descricao: "Desenvolver um projeto usando React", status: "finalizado" }
   ])
 
+  function adicionarTask(titulo, descricao) {
+    const novaTask = {
+      id: tasks.length + 1,
+      titulo,
+      descricao,
+      status: "por-fazer"
+    }
+    setTasks([...tasks, novaTask])
+  }
+
+  function atualizarStatus(id, novoStatus) {
+    const tarefasAtualizadas = tasks.map(task => {
+      if (task.id === id) {
+        return { ...task, status: novoStatus }
+      }
+      return task
+    })
+    setTasks(tarefasAtualizadas)
+  }
+
+  function excluirTask(id) {
+    const tarefasAtualizadas = tasks.filter(task => task.id !== id)
+    setTasks(tarefasAtualizadas)
+  }
+
   return (
     <div>
       <Header classname="header">
         <h1>Taskboard</h1>
       </Header>
-      <Board className="board" tasks={tasks} />
+      <Board className="board" tasks={tasks} atualizarStatus={atualizarStatus} excluirTask={excluirTask} />
       <button onClick={() => setModalOpen(true)} className="add-task-button">✏️</button>
-      {modalOpen && <TaskModal onClose={() => setModalOpen(false)} />}
+      {modalOpen && <TaskModal onClose={() => setModalOpen(false)} adicionarTask={adicionarTask} />}
       <Footer className="footer">
         <p>© 2026 Taskboard. All rights reserved.</p>
       </Footer>
