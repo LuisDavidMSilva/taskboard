@@ -178,6 +178,18 @@ form {
   align-self: center;
 }
 
+.column-todo {
+  background-color: #62C3F6
+}
+
+.column-in-progress {
+  background-color: #F97E1D
+}
+
+.column-done {
+  background-color: #1E9A5C
+}
+
 .footer {
   text-align: center;
   padding: 20px;
