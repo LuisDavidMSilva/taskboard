@@ -190,9 +190,35 @@ form {
   background-color: #1E9A5C
 }
 
+.button-todo {
+  background-color: #62C3F6;
+}
+
+.button-in-progress {
+  background-color: #F97E1D;
+} 
+
+.button-done {
+  background-color: #1E9A5C;
+}
+
+.delete-button {
+  background-color: #FF4C4C;
+}
+
 .footer {
   text-align: center;
   padding: 20px;
   background-color: #282c34;
   margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  .board {
+    flex-direction: column;
+  }
+  .column {
+    min-height: 500px;
+    min-width: 350px;
+  }
 }

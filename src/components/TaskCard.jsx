@@ -3,10 +3,10 @@ function TaskCard({ task, atualizarStatus, excluirTask }) {
         <div className="task-card">
             <h3>{task.titulo}</h3>
             <p>{task.descricao}</p>
-            <button onClick={() => atualizarStatus(task.id, "por-fazer")}>Por fazer</button>
-            <button onClick={() => atualizarStatus(task.id, "em-andamento")}>Em andamento</button>
-            <button onClick={() => atualizarStatus(task.id, "finalizado")}>Finalizado</button> 
-            <button onClick={() => excluirTask(task.id)} className="delete-button">Excluir</button>
+            <button className="button-todo" onClick={() => atualizarStatus(task.id, "por-fazer")}>Por fazer</button>
+            <button className="button-in-progress" onClick={() => atualizarStatus(task.id, "em-andamento")}>Em andamento</button>
+            <button className="button-done" onClick={() => atualizarStatus(task.id, "finalizado")}>Finalizado</button>
+            <button className="delete-button" onClick={() => excluirTask(task.id)}>Excluir</button>
         </div>
     )
 }
