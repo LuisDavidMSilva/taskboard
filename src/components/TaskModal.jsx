@@ -15,7 +15,7 @@ function TaskModal({onClose, adicionarTask}) {
                 <textarea value={descricao} onChange={(e) => setDescricao(e.target.value)} placeholder="Descrição da tarefa"></textarea>
                 <button className="modal-add-task-button" type="submit" onClick={(e) => {
                     e.preventDefault()
-                    adicionarTask(titulo, descricao)
+                    adicionarTask({titulo, descricao, status: 'por-fazer'} )
                     onClose()
                 }}>Adicionar</button>
             </form>

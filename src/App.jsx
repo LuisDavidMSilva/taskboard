@@ -3,55 +3,91 @@ import Header from './components/Header'
 import Board from './components/Board'
 import Footer from './components/Footer'
 import TaskModal from './components/TaskModal'
+import EditTask from './components/EditTask'
 import { useState, useEffect } from 'react'
 
 function App() {
 
   const [modalOpen, setModalOpen] = useState(false)
 
-  const [tasks, setTasks] = useState(() => {
-    const salvas = localStorage.getItem("tasks")
-    return salvas ? JSON.parse(salvas) : [
-      { id: 1, titulo: "Estudar React", descricao: "Ver documentação oficial", status: "por-fazer" },
-      { id: 2, titulo: "Fazer exercícios", descricao: "Resolver exercícios do curso", status: "em-andamento" },
-      { id: 3, titulo: "Criar projeto", descricao: "Desenvolver um projeto usando React", status: "finalizado" }
-    ]
-  })
-  function adicionarTask(titulo, descricao) {
-    const novaTask = {
-      id: tasks.length + 1,
-      titulo,
-      descricao,
-      status: "por-fazer"
-    }
-    setTasks([...tasks, novaTask])
+  const [tasks, setTasks] = useState([])
+
+  useEffect(() => {
+    fetch('http://localhost:5174/tasks')
+      .then(res => res.json())
+      .then(data => setTasks(data))
+  }, [])
+
+  async function buscarTasks() {
+    const response = await fetch('http://localhost:5174/tasks')
+    const data = await response.json()
+    setTasks(data)
   }
 
-  function atualizarStatus(id, novoStatus) {
+
+  async function adicionarTask(novaTask) {
+    const response = await fetch('http://localhost:5174/tasks', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(novaTask)
+    })
+    buscarTasks()
+  }
+
+  async function atualizarStatus(id, novoStatus) {
+    const response = await fetch(`http://localhost:5174/tasks/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ status: novoStatus })
+    })
+    const data = await response.json()
     const tarefasAtualizadas = tasks.map(task => {
       if (task.id === id) {
-        return { ...task, status: novoStatus }
+        return { ...task, status: data.status }
       }
       return task
     })
     setTasks(tarefasAtualizadas)
   }
 
-  function excluirTask(id) {
-    const tarefasAtualizadas = tasks.filter(task => task.id !== id)
+  async function atualizarTask(id, dadosAtualizados) {
+    const response = await fetch(`http://localhost:5174/tasks/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dadosAtualizados)
+    })
+    const data = await response.json()
+    const tarefasAtualizadas = tasks.map(task => {
+      if (task.id === id) {
+        return { ...task, ...data }
+      }
+      return task
+    })
     setTasks(tarefasAtualizadas)
   }
 
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks))
-  }, [tasks])
+  async function excluirTask(id) {
+    const response = await fetch(`http://localhost:5174/tasks/${id}`, {
+      method: 'DELETE'
+    })
+    if (response.ok) {
+      const tarefasAtualizadas = tasks.filter(task => task.id !== id)
+      setTasks(tarefasAtualizadas)
+    }
+  }
 
   return (
     <div>
       <Header classname="header">
         <h1>Taskboard</h1>
       </Header>
-      <Board className="board" tasks={tasks} atualizarStatus={atualizarStatus} excluirTask={excluirTask} />
+      <Board className="board" tasks={tasks} atualizarStatus={atualizarStatus} excluirTask={excluirTask} atualizarTask={atualizarTask} />
       <button onClick={() => setModalOpen(true)} className="add-task-button">✏️</button>
       {modalOpen && <TaskModal onClose={() => setModalOpen(false)} adicionarTask={adicionarTask} />}
       <Footer className="footer">
