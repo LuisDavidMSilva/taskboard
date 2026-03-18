@@ -91,6 +91,7 @@ h1 {
   padding: 10px;
   margin-bottom: 8px;
   color: #333;
+  position: relative;
 }
 
 .modal-overlay {
@@ -202,8 +203,18 @@ form {
   background-color: #1E9A5C;
 }
 
+.edit-button {
+  background-color: #FFD700;
+  position: absolute;
+  top: 8px;
+  right: 40px;
+}
+
 .delete-button {
-  background-color: #FF4C4C;
+  background-color: #FF6347;
+  position: absolute;
+  top: 8px;
+  right: 8px;
 }
 
 .footer {
