@@ -43,9 +43,7 @@ header {
 }
 
 h1 {
-  font-size: 26px;
-  margin: 0;
-  color: green
+  color: green;
 }
 
 .avatar {
@@ -87,12 +85,13 @@ h1 {
   padding: 0;
 }
 
-.column li {
+.task-card {
   background-color: #fff8e7;
   border-radius: 6px;
   padding: 10px;
   margin-bottom: 8px;
   color: #333;
+  position: relative;
 }
 
 .modal-overlay {
@@ -117,13 +116,13 @@ h1 {
   width: 300px;
   text-align: center;
   position: relative;
+}
 
-  .modal-content h2 
+.modal-content h2 
   {
     margin-top: 0;
     color: #333;
   }
-}
 
 .modal-overlay button {
   background-color:darkcyan;
@@ -135,7 +134,6 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
 }
 
 .close-button {
@@ -181,9 +179,57 @@ form {
   align-self: center;
 }
 
+.column-todo {
+  background-color: #62C3F6
+}
+
+.column-in-progress {
+  background-color: #F97E1D
+}
+
+.column-done {
+  background-color: #1E9A5C
+}
+
+.button-todo {
+  background-color: #62C3F6;
+}
+
+.button-in-progress {
+  background-color: #F97E1D;
+} 
+
+.button-done {
+  background-color: #1E9A5C;
+}
+
+.edit-button {
+  background-color: #FFD700;
+  position: absolute;
+  top: 8px;
+  right: 40px;
+}
+
+.delete-button {
+  background-color: #FF6347;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
 .footer {
   text-align: center;
   padding: 20px;
   background-color: #282c34;
   margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  .board {
+    flex-direction: column;
+  }
+  .column {
+    min-height: 500px;
+    min-width: 350px;
+  }
 }
